@@ -1,51 +1,52 @@
 # demo-reactive-otel
 
-Демонстрационный проект для интеграции Spring Boot приложения с OpenTelemetry и Jaeger.
-Стек: Kotlin, Spring Boot Webflux, OpenTelemetry(agent, collector), Jaeger, Docker, Docker Compose, Git, Maven.
+## Description
+Demonstration project for integrating a Spring Boot application with OpenTelemetry and Jaeger.
+Stack: Kotlin, Spring Boot Webflux, OpenTelemetry (agent, collector), Jaeger, Docker, Docker Compose, Git, Maven.
 
-## Содержание
+## Contents
 
-- [Установка](#установка)
-- [Использование](#использование)
-- [Конфигурация](#конфигурация)
-- [Вклад](#вклад)
-- [Лицензия](#лицензия)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Contribution](#contribution)
+- [License](#license)
 
-## Установка
+## Installation
 ```bash
-# Клонируйте репозиторий
+# Clone the repository
 git clone https://github.com/dmittriy13/demo-reactive-otel.git
 
-# Перейдите в директорию проекта
+# Navigate to the project directory
 cd demo-reactive-otel
 
-# Установите зависимости
+# Install dependencies
 mvn install
 ```
 
-## Использование
-1. Запустите docker-compose.yml
-2. Запустите приложение app-first с помощью run configuration
-3. Запустите приложение app-second с помощью run configuration
-4. Отправьте запрос в app-first с помощью consume_event run configuration
-5. Отправьте запрос в app-first с помощью send_event run configuration
-6. Перейдите на http://localhost:16686/ и посмотрите трейсы
+## Usage
+1. Run `docker-compose.yml`
+2. Start the `app-first` application using the run configuration
+3. Start the `app-second` application using the run configuration
+4. Send a request to `app-first` using the `consume_event` run configuration
+5. Send a request to `app-first` using the `send_event` run configuration
+6. Go to `http://localhost:16686/` and view the traces
 
-## Конфигурация
+## Configuration
 
 ### app-first
 ```yaml
 server:
-  # указываем на каком порту будет запущен сервер
+  # specify the port on which the server will run
   port: 8080
 
 spring:
-  # указываем имя приложения
+  # specify the application name
   application:
     name: app-first
 
 org:
-  # конфигурируем обменники, очереди и биндинги для RabbitMQ
+  # configure exchanges, queues, and bindings for RabbitMQ
   rabbit:
     queues:
       - name: events.q
@@ -58,8 +59,8 @@ org:
       - exchange: events.ex
         queue: events.q
         routingKey: events.rk
-  
-  # конфигурируем web-client для обращения в app-second
+
+  # configure the web-client to call app-second
   web-client:
     app-second:
       url: http://localhost:8081
@@ -68,16 +69,16 @@ org:
 ### app-second
 ```yaml
 server:
-  # указываем на каком порту будет запущен сервер
+  # specify the port on which the server will run
   port: 8081
 
 spring:
-  # указываем имя приложения
+  # specify the application name
   application:
     name: app-second
 
 org:
-  # конфигурируем обменники, очереди и биндинги для RabbitMQ
+  # configure exchanges, queues, and bindings for RabbitMQ
   rabbit:
     queues:
     exchanges:
@@ -87,15 +88,15 @@ org:
     bindings:
 ```
 
-## Вклад
-1. Инструкции по внесению вклада в проект.  
-2. Форкните репозиторий
-3. Создайте ветку для ваших изменений (git checkout -b feature/ваша-функция)
-4. Закоммитьте ваши изменения (git commit -m 'Добавлена новая функция')
-5. Запушьте ветку (git push origin feature/ваша-функция)
-6. Создайте Pull Request
+## Contribution
+1. Instructions for contributing to the project.
+2. Fork the repository
+3. Create a branch for your changes (`git checkout -b feature/your-feature`)
+4. Commit your changes (`git commit -m 'Added new feature'`)
+5. Push the branch (`git push origin feature/your-feature`)
+6. Create a Pull Request
 
-## Лицензия
+## License
 ```
 MIT License
 
