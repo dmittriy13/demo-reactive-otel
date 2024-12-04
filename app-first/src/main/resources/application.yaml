@@ -1,0 +1,23 @@
+server:
+    port: 8080
+
+spring:
+  application:
+    name: app-first
+
+org:
+  rabbit:
+    queues:
+      - name: events.q
+        durable: true
+    exchanges:
+      - name: events.ex
+        type: direct
+        durable: true
+    bindings:
+      - exchange: events.ex
+        queue: events.q
+        routingKey: events.rk
+  web-client:
+    app-second:
+      url: http://localhost:8081

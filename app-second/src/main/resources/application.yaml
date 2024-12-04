@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: app-second
+
+org:
+  rabbit:
+    queues:
+    exchanges:
+      - name: events.ex
+        type: direct
+        durable: true
+    bindings:

@@ -1,0 +1,32 @@
+version: "4.0"
+
+services:
+#  app-first:
+#    build: app-first
+#    ports:
+#      - "8080:8080"
+#
+#  app-second:
+#    build: app-second
+#    ports:
+#      - "8081"
+
+  rabbitmq:
+    image: artifactory.gitlab.bcs.ru/docker-hub/rabbitmq:4.0.4-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  jaeger-service:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686" # Web UI
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
+    ports:
+      - "4318:4318" # OTLP http receiver
+    depends_on:
+      - jaeger-service

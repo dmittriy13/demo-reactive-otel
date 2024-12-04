@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="send_event" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" singleton="false" environment="&lt;No Environment&gt;" path="$PROJECT_DIR$/requests/send_event.http" requestIdentifier="#1" runType="Run single request">
+    <method v="2" />
+  </configuration>
+</component>

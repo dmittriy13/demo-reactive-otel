@@ -1,0 +1,21 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <appender name="JSON_CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <excludeMdcKeyName>trace_flags</excludeMdcKeyName>
+            <mdcKeyFieldName>trace_id=traceId</mdcKeyFieldName>
+            <mdcKeyFieldName>span_id=spanId</mdcKeyFieldName>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="JSON_CONSOLE_APPENDER"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_APPENDER"/>
+    </root>
+
+</configuration>

@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="AppFirstApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <envs>
+      <env name="OTEL_LOGS_EXPORTER" value="none" />
+      <env name="OTEL_METRICS_EXPORTER" value="none" />
+    </envs>
+    <module name="app-first" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.appfirst.AppFirstApplication" />
+    <option name="VM_PARAMETERS" value="-javaagent:opentelemetry-javaagent.jar -Dotel.service.name=app-first" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
